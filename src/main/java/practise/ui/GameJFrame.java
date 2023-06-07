@@ -14,6 +14,9 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
 
 
     // make JMenuItem member variable, so it can be reached in other method
+    JMenu changeImageJMenu = new JMenu("Change Image");
+    JMenuItem animalSubJMenu = new JMenuItem("Animal");
+    JMenuItem sportSubJMenu = new JMenuItem("Sport");
     JMenuItem reStartJMenu = new JMenuItem("Restart Game");
     JMenuItem reLoginJMenu = new JMenuItem("ReLogin");
     JMenuItem stopGameJMenu = new JMenuItem("Stop Game");
@@ -134,16 +137,24 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         JMenu functionJMenu = new JMenu("Function");
         JMenu aboutJMenu = new JMenu("About");
 
+
         //add action to each item
         reStartJMenu.addActionListener(this);
         reLoginJMenu.addActionListener(this);
         stopGameJMenu.addActionListener(this);
         contactInfo.addActionListener(this);
+        animalSubJMenu.addActionListener(this);
+        sportSubJMenu.addActionListener(this);
 
-        //build relation between JMenuBar JMenu and JMenuItem
+
+
+        //build relation between JMenuBar JMenu and JMenuItem subJMenu
+        functionJMenu.add(changeImageJMenu);
         functionJMenu.add(reStartJMenu);
         functionJMenu.add(reLoginJMenu);
         functionJMenu.add(stopGameJMenu);
+        changeImageJMenu.add(animalSubJMenu);
+        changeImageJMenu.add(sportSubJMenu);
 
         aboutJMenu.add(contactInfo);
 
@@ -278,6 +289,7 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Random random = new Random();
         Object obj = e.getSource();
         if (obj == reStartJMenu){
             System.out.println("restart");
@@ -296,6 +308,19 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         } else if (obj == stopGameJMenu) {
             System.out.println("stopGame");
             System.exit(0);
+        } else if (obj == animalSubJMenu) {
+            System.out.println("animal");
+            //every time click a new option , is equal to restart with new image
+            stepCount = 0;
+            randomArr();
+            path = "..\\jigsawPuzzle\\image\\animal\\animal" + random.nextInt(1,9) + "\\";
+            initImage();
+        } else if (obj == sportSubJMenu) {
+            System.out.println("sport");
+            stepCount = 0;
+            randomArr();
+            path ="..\\jigsawPuzzle\\image\\sport\\sport" + random.nextInt(1,11) + "\\";
+            initImage();
         } else if (obj == contactInfo) {
             System.out.println("contact");
 
